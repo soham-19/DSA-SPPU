@@ -1,0 +1,23 @@
+{
+    "C_Cpp.errorSquiggles": "disabled",
+    "files.associations": {
+        "iostream": "cpp",
+        "random": "cpp",
+        "*.tcc": "cpp",
+        "new": "cpp",
+        "cstdio": "cpp",
+        "deque": "cpp",
+        "string": "cpp",
+        "vector": "cpp",
+        "functional": "cpp",
+        "ostream": "cpp",
+        "list": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "algorithm": "cpp"
+    },
+    "java.format.settings.url": "eclipse-formatter.xml",
+    "window.autoDetectColorScheme": true,
+    "workbench.preferredDarkColorTheme": "Atomize",
+    "workbench.colorTheme": "Atomize"
+}

@@ -1,0 +1,10 @@
+{
+    "editor.fontFamily": "'Fira Code',Consolas, 'Courier New', monospace",
+    "workbench.colorTheme": "Atomize",
+    "editor.acceptSuggestionOnCommitCharacter": true,
+    "vsintellicode.typescript.completionsEnabled": true,
+    "vsintellicode.java.completionsEnabled": true,
+    "java.codeGeneration.generateComments": true,
+    "java.format.comments.enabled": true,
+    "java.inlayHints.parameterNames.enabled": "none"
+}

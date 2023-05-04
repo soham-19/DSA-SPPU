@@ -1,12 +1,11 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-// Beginning with an empty binary search tree construct a binary search tree by inserting the values in the given order after constructing binary tree 
-// insert new node 
-// find number of nodes in the longest path from root 
-// minimum data value found in the tree 
-// change a tree so that the roles of left and right pointers are swapped at every node 
-// search a value
+/*
+Beginning with an empty binary search tree, Construct binary search tree by inserting the values in the order given After constructing a binary tree
+
+i Insert new node, i. Find number of nodes in longest path from root, iii. Minimum data value found in the tree, iv Change a tree so that the roles of the left and right pointers are swapped at every node, v Search a value
+*/
 
 class Node {
     public:
