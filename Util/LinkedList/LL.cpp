@@ -1,25 +1,23 @@
 #include <iostream>
 using namespace std;
 
-template <class T>
 class ListNode {
     private:
-        T data;
-        ListNode<T> *next;
+        int data;
+        ListNode *next;
 
     public:
-        ListNode(T x){
+        ListNode(int x){
             data = x;
             next = NULL;
         }
 
-    template <class> friend class List;
+    friend class List;
 };
 
-template <class T>
 class List{
     private:
-        ListNode<T> *head, *tail;
+        ListNode *head, *tail;
         int len;
 
     public:
@@ -33,9 +31,9 @@ class List{
             return len;
         }
 
-        void push_back(T x) {
+        void push_back(int x) {
 
-            ListNode<T> *new_node = new ListNode<T>(x);
+            ListNode *new_node = new ListNode(x);
             len++;
             if(tail == NULL){
                 head = tail = new_node;
@@ -46,9 +44,9 @@ class List{
             }
         }
 
-        void push_front(T x) {
+        void push_front(int x) {
 
-            ListNode<T> *new_node = new ListNode<T>(x);
+            ListNode *new_node = new ListNode(x);
             len++;
             if(head == NULL){
                 head = tail = new_node;
@@ -67,14 +65,14 @@ class List{
             }
             else if(head == tail){
 
-                ListNode<T> *temp = tail;
+                ListNode *temp = tail;
                 head = tail = NULL;
                 delete temp;
             }
 
             else {
 
-                ListNode<T> *newTail = head;
+                ListNode *newTail = head;
                 while(newTail->next != tail)
                     newTail = newTail->next;
 
@@ -93,14 +91,14 @@ class List{
             }
             else if(head == tail){
 
-                ListNode<T> *temp = head;
+                ListNode *temp = head;
                 head = tail = NULL;
                 delete temp;
             }
 
             else {
 
-                ListNode<T> *temp = head;
+                ListNode *temp = head;
                 head = head->next;
                 delete temp;
             }
@@ -109,7 +107,7 @@ class List{
 
         void print(){
 
-            ListNode<T> *t = head;
+            ListNode *t = head;
             cout << "LL : ";
             while(t!=NULL){
                 cout << t->data << " ";
@@ -119,7 +117,7 @@ class List{
         }
 };
 
-/*
+
 int main(){
 
     List ll;
@@ -163,5 +161,3 @@ int main(){
         }
     }
 }
-
-*/

@@ -124,7 +124,7 @@ void BST::insert(string data) {
 Node* BST:: successor(Node* root) {
     while (root->left != NULL)
         root = root->left;
-        return root;
+    return root;
 }
 
 Node* BST::remove(Node* root, string key) {
@@ -146,7 +146,7 @@ Node* BST::remove(Node* root, string key) {
         }
 
         if (root->left == NULL)
-                return root->right;
+            return root->right;
 
         else if (root->right == NULL)
             return root->left;
