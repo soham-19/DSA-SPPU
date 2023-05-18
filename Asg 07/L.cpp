@@ -107,89 +107,27 @@ public:
     }
 };
 // ---------------------- Queue ----------------------
-// ---------------------- Edge Node List----------------------
-
-class Edge{
-    public:
-
-    int src;
-    int dest;
-    int wt;
-
-    Edge(int s, int d, int w=1){
-        src = s;
-        dest = d;
-        wt = w;
-    }
-};
-
-class Node{
-    public:
-
-    Edge *e;
-    Node *next;
-
-    Node(Edge*e){
-        this->e = e;
-        next = NULL;
-    }
-};
-
-class List{
-    public:
-
-    Node *head;
-    Node *tail;
-    int len;
-
-    List(){
-        head = NULL;
-        tail = NULL;
-        len = 0;
-    }
-
-    void printList(){
-        Node *t = head;
-        while(t!=NULL){
-            cout << t->e->dest << " ->";
-            t = t->next;
-        }
-        cout << "NULL\n";
-    }
-
-    void push_back(Edge*e){
-
-        if(head == NULL){
-            head = tail = new Node(e);
-            len++;
-            return;
-        }
-
-        tail->next = new Node(e);
-        tail = tail->next;
-        len++;
-    }
-
-    int size(){
-        return len;
-    }
-
-};
 
 class Graph{
     int V;
-    List edges[MAX_SIZE];
+    int mat[MAX_SIZE][MAX_SIZE];
 
-public:
+    public:
     Graph(int v){
         cout << "Graph has been created.\n";
         V = v;
+        for (int i = 0; i < v;i++){
+            for (int j = 0; j < v;j++)
+                mat[i][j] = 0;
+        }
         createGraph();
     }
     void p(){
         for (int i = 0; i < V;i++){
-            cout << i << " :\t";
-            edges[i].printList();
+            for (int j = 0; j < V;j++){
+                cout << mat[i][j] <<  " ";
+            }
+            cout << endl;
         }
     }
 
@@ -205,8 +143,7 @@ void Graph::addEdge(int i,int j){
         char ch;
         cin >> ch;
         if(ch=='y' || ch=='Y'){
-            edges[i].push_back(new Edge(i, j));
-            edges[j].push_back(new Edge(j,i));
+            mat[i][j] = mat[j][i] = 1;
         }
 }
 
@@ -219,17 +156,13 @@ void Graph::createGraph(){
     cout << "All data stored.\n";
 }
 void Graph::BFS(int src){
-
     bool visited[V] = {false};
     cout << "BFS : ";
-
     bfsUtil(src, visited);
-
     for (int i = 0; i < V;i++){
         if(!visited[i])
             bfsUtil(i, visited);
     }
-
     cout << endl;
 }
 void Graph::bfsUtil(int src, bool visited[]) {
@@ -246,26 +179,20 @@ void Graph::bfsUtil(int src, bool visited[]) {
             visited[curr] = true;
             cout << curr << " ";
 
-            Node *t = edges[curr].head;
-            while(t!=NULL){
-                if(!visited[t->e->dest]){
-                    q.add(t->e->dest);
+            for (int v = 0; v < V; v++) {
+                if (mat[curr][v]==1 && !visited[v]) {
+                    q.add(v);
                 }
-                t = t->next;
             }
-
         }
 
     }
 }
 
 void Graph::DFS(int src){
-
     cout << "DFS : ";
     bool visited[V] = {false};
-
     dfsUtil(src,visited);
-
     for (int i = 0; i < V;i++){
         if(!visited[i])
             dfsUtil(i,visited);
@@ -287,12 +214,10 @@ void Graph::dfsUtil(int i, bool visited[]) {
             cout << curr << " ";
 
             // Push unvisited adjacent vertices onto the stack
-            Node *t = edges[curr].head;
-            while(t!=NULL){
-                if(!visited[t->e->dest]){
-                    s.push(t->e->dest);
+            for (int v = 0; v <V; v++) {
+                if (mat[curr][v] == 1 && !visited[v]) {
+                    s.push(v);
                 }
-                t = t->next;
             }
         }
     }
@@ -304,7 +229,6 @@ int main(){
     cout << "Enter number of vertices : ";
     cin >> v;
     Graph *g = new Graph(v);
-    g->p();
 
     cout << "Enter source for BFS : ";
     cin >> v;
