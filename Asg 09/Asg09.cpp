@@ -129,7 +129,7 @@ Node* AVL::RR(Node* t){
 Node* AVL::LR(Node* t){
 
 	cout << "\t\t*\tLR Case\n";
-	t->left = rotateLeft(t->left
+	t->left = rotateLeft(t->left);
 	t = rotateRight(t);
 	return t;
 }
