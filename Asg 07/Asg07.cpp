@@ -202,9 +202,9 @@ public:
 };
 void Graph::addEdge(int i,int j){
         cout << "Is there path from " << i << " to " << j << " ? ";
-        char ch;
+        bool ch;
         cin >> ch;
-        if(ch=='y' || ch=='Y'){
+        if(ch ==1){
             edges[i].push_back(new Edge(i, j));
             edges[j].push_back(new Edge(j,i));
         }

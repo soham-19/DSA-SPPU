@@ -3,43 +3,48 @@
 Implement all the functions of a dictionary (ADT) using hashing and handle collisions using chaining with/without replacement.
 
 Data Set of (key, value) pairs, Keys are mapped to values, Keys must be comparable, Keys must be unique Standard Operations. Insert(key, value), Find(key), Delete(key)
+
 */
 
 /*
-
-class node
-class linked list
-class dict : in that array of linked list 
-
-    put : add at end of ll
-    find : search in ll
-
+node
+ll
+dict
+    insert
+    search
+    delete
+    update
+    print
 */
+
+//                  start of program
 
 #include<iostream>
 using namespace std;
 
-bool isalphabate(char ch){
+//          global functions
+bool isAlphabet(char ch){
     return (ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z');
 }
 
-char tolowerA(char ch){
+char toLower(char ch){
     if (ch >= 'A' && ch <= 'Z')
         return ch + 32;
     return ch;
 }
 
-string updateStr(string str) {
-
+string updateString(string str){
     string result;
-
     for (int i = 0; str[i] != '\0';i++){
-
-        if(isalphabate(str[i]))         //alpha asel tr ch str la add else skip 
-            result += tolowerA(str[i]);     //tolower added always
+        if(isAlphabet(str[i])) {
+            result += toLower(str[i]);
+            cout << result << endl;
+        }
     }
     return result;
 }
+
+//      classes
 
 class Node{
     public:
@@ -47,7 +52,8 @@ class Node{
         string meaning;
         Node *next;
 
-        Node(string w, string m){
+
+        Node(string w,string m){
             keyword = w;
             meaning = m;
             next = NULL;
@@ -55,170 +61,160 @@ class Node{
 };
 
 class List{
+
     public:
-        Node *head,*tail;
+        Node *head, *tail;
 
         List(){
-            head = NULL;
+            head = tail = NULL;
         }
 
         void printList();
-        void push_back(string w);
-        void search(string key);
-        void modify(string);
-        void dlt(string key);
+        void push_back(string);
+        void search(string);
+        void updateMean(string);
+        void del(string);
 };
 
 void List::printList(){
 
+    int i = 1;
     Node *temp = head;
-    if(temp == NULL){
-        cout << "empty bucket.\n";
-        return;
-    }
-    int count = 1;
+    while(temp!=NULL){
 
-    while(temp != NULL){
-        if(count==1){
-            cout << "\t" << count++ << ". " << temp->keyword <<" : " << temp->meaning << endl;
-        }
-        else{
-            cout << "\t\t" << count++ << ". " << temp->keyword <<" : " << temp->meaning << endl;
-        }
+        if(i!=1)
+            cout << "\t\t";
+    
+        cout << i << ". " << temp->keyword << " : " << temp->meaning << endl;
         temp = temp->next;
+        i++;
     }
 }
 
-void List::push_back(string w){
+void List::push_back(string w) {
 
-    cout << "Enter the meaning : ";
-    string mean;
+    string m;
+    cout << "Enter meaning of '" << w << "' : ";
     cin.ignore();
-    getline(cin, mean);
-
-    Node *newNode = new Node(w, mean);
+    getline(cin,m);
 
     if(head==NULL){
-        head = tail = new Node(w, mean);
-        return;
+        head = tail = new Node(w, m);
+    } else {
+        tail->next = new Node(w, m);
+        tail = tail->next;
     }
-    tail->next = new Node(w, mean);
-    tail = tail->next;
 }
 
 void List::search(string key){
     int probe = 0;
     Node *temp = head;
+
     while(temp!=NULL){
         probe++;
-        if(temp->keyword == key){
+        if(temp->keyword == key) {
             cout << "Search Successfull with probe = " << probe << endl;
-            cout << key << " : " << temp->meaning << endl;
             return;
         }
         temp = temp->next;
     }
-    cout << "Search Unsuccessfull with probe = "<< probe << endl;
+    cout << "Search unsuccessfull with probe = " << probe << endl;
 }
 
-void List::modify(string key){
-
+void List::updateMean(string key) {
     Node *temp = head;
-    while(temp!=NULL){
 
-        if(temp->keyword == key){
+    while(temp!=NULL){
+        if(temp->keyword == key) {
             cout << "Enter new meaning : ";
-            cin >> temp->meaning;
+            cin.ignore();
+            getline(cin, temp->meaning);
             return;
         }
         temp = temp->next;
     }
-    cout << "keyword doesn't exist.\n";
-    cout << "Press (y/Y) to add it : ";
+    cout << "Key not found.\nPress y/Y to insert it. : ";
     char ch;
     cin >> ch;
-    if(ch=='y' || ch=='Y'){
+    if(ch=='Y'||ch=='y'){
         push_back(key);
     }
 }
 
-void List::dlt(string key) {
+void List::del(string key) {
 
-    Node* curr = head;
-    Node* prev = NULL;
-    int probe = 0;
-    while (curr != NULL) {
-        probe++;
-        if (curr->keyword == key) {
-            if (prev == NULL) {
-                // If the node to be removed is the head node
+    Node *prev = NULL, *curr = head;
+    while(curr!=NULL) {
+
+        if(curr->keyword==key) {
+
+            if(prev==NULL) {
                 head = curr->next;
             } else {
                 prev->next = curr->next;
             }
             delete curr;
-            cout << key << " has been removed. Probe = " << probe << endl;
+            cout << "Key deleted.\n";
             return;
         }
         prev = curr;
         curr = curr->next;
     }
-    cout << "Deletion unsuccessfull with probe = " << probe << endl;
+    cout << "Not found\n";
 }
 
 class Dict{
+
+        int hash(string);
+
     public:
         List buckets[26];
 
-        int hash(string s);
-        void print();
-        void insert(string s);
+        void printDict();
+        void insert(string);
         void find(string);
         void update(string);
         void remove(string);
 };
 
-void Dict::print(){
-
-    cout << "Char" << "\t" << "Linked-List\n";
-    cout << "------------------------------\n";
-    for (int i = 0; i < 26; i++) {
-
-        cout << char(i + 'a') << "\t";
-        buckets[i].printList();
-        cout << "------------------------------\n";
-    }
-}
-
 int Dict::hash(string s){
     return s[0] - 'a';
 }
 
-void Dict::insert(string s){
-    s = updateStr(s);
-    int idx = hash(s);
-    buckets[idx].push_back(s);
+void Dict::printDict(){
+
+    cout << "   "  << "ch\t:\t"
+         << "Chains\n";
+    cout << "\n------------------------------\n";
+
+    for (int i = 0; i < 26;i++){
+        cout << "   " <<char(i + 'a') << "\t:\t";
+        buckets[i].printList();
+        cout << "\n------------------------------\n";
+    }
 }
 
-void Dict::find(string key){
-    key = updateStr(key);
-    int idx = hash(key);
-    buckets[idx].search(key);
-
+void Dict::insert(string s) {
+    int bi = hash(s);
+    buckets[bi].push_back(s);
 }
 
-void Dict::update(string key){
-    key = updateStr(key);
-    int idx = hash(key);
-    buckets[idx].modify(key);
+void Dict::find(string s) {
+    int bi = hash(s);
+    buckets[bi].search(s);
 }
 
-void Dict::remove(string key) {
-    key = updateStr(key);
-    int idx = hash(key);
-    buckets[idx].dlt(key);
+void Dict::update(string s) {
+    int bi = hash(s);
+    buckets[bi].updateMean(s);
 }
 
+void Dict::remove(string s) {
+    int bi = hash(s);
+    buckets[bi].del(s);
+}
+
+// main func
 int main(){
 
     string s;
@@ -247,34 +243,34 @@ int main(){
             case 1:
                 cout << "Enter word to be inserted : ";
                 cin >> s;
-                dictionary->insert(updateStr(s));
+                dictionary->insert(updateString(s));
                 cout << endl;
                 break;
 
             case 2:
                 cout << "Enter word to be searched : ";
                 cin >> s;
-                dictionary->find(s);
+                dictionary->find(updateString(s));
                 cout << endl;
                 break;
 
             case 3:
                 cout << "Enter word to be updated : ";
                 cin >> s;
-                dictionary->update(s);
+                dictionary->update(updateString(s));
                 cout << endl;
                 break;
 
             case 4:
                 cout << "Enter word to be removed : ";
                 cin >> s;
-                dictionary->remove(s);
+                dictionary->remove(updateString(s));
                 cout << endl;
                 break;
 
             case 5:
                 cout << " * D I C T I O N A R Y * : \n";
-                dictionary->print();
+                dictionary->printDict();
                 break;
 
             default:
@@ -282,5 +278,4 @@ int main(){
         }
     }
 
-    return 0;
 }

@@ -120,7 +120,7 @@ class Graph{
             for (int j = 0; j < v;j++)
                 mat[i][j] = 0;
         }
-        createGraph();
+        // createGraph();
     }
     void p(){
         for (int i = 0; i < V;i++){
@@ -225,16 +225,18 @@ void Graph::dfsUtil(int i, bool visited[]) {
 }
 int main(){
 
-    int v;
-    cout << "Enter number of vertices : ";
-    cin >> v;
-    Graph *g = new Graph(v);
+Graph graph(7);
+    graph.addEdge(0, 1);
+    graph.addEdge(0, 2);
+    graph.addEdge(1, 3);
+    // graph.addEdge(2, 3);
+    graph.addEdge(3, 4);
+    // graph.addEdge(4, 2); // Creates a cycle (2 -> 3 -> 4 -> 2)
+    graph.addEdge(5, 6);
 
-    cout << "Enter source for BFS : ";
-    cin >> v;
-    g->BFS(v);
-    cout << "Enter source for DFS : ";
-    cin >> v;
-    g->DFS(v);
+    // Perform BFS starting from vertex 0
+    int sourceVertex = 0;
+    graph.BFS(6);
+    graph.DFS(6-6);
 
 }
