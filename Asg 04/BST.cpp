@@ -298,7 +298,7 @@ int main()
 	int x;
 	BST bstree;
 
-	for (int i = 0; i < 15; i++){
+	for (int i = 0; i < 6; i++){
 		cout << " -> ";
 		cin >> x;
 		bstree.insert(x);

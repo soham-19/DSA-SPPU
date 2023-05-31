@@ -146,21 +146,20 @@ Node* BST::remove(Node* root, string key) {
         }
 
         if (root->left == NULL)
-                return root->right;
+            return root->right;
 
         else if (root->right == NULL)
             return root->left;
 
-            Node *IS = successor(root->right);  // replacing by inorder succ.
+        Node *IS = successor(root->right);  // replacing by inorder succ.
 
-            root->keyword = IS->keyword;
-            root->mean.clear();
-            for (int i = 0; i < IS->mean.size(); i++)
-            {
+        root->keyword = IS->keyword;
+        root->mean.clear();
+        for (int i = 0; i < IS->mean.size(); i++){
             root->mean.push_back(IS->mean[i]);  // copy meanings of IS to current node
-            }
+        }
 
-            root->right = remove(root->right, IS->keyword); //delete inorder succ. now after copying
+        root->right = remove(root->right, IS->keyword); //delete inorder succ. now after copying
     }
 
     return root;

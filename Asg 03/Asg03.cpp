@@ -6,12 +6,10 @@ Data Set of (key, value) pairs, Keys are mapped to values, Keys must be comparab
 */
 
 /*
-
 class node
 class linked list
 class dict : in that array of linked list 
-
-    put : add at end of ll
+    insert : add at end of ll
     find : search in ll
 
 */
@@ -36,7 +34,7 @@ string updateStr(string str) {
     for (int i = 0; str[i] != '\0';i++){
 
         if(isalphabate(str[i]))         //alpha asel tr ch str la add else skip 
-            result += tolowerA(str[i]);     //tolower added always
+            result += tolowerA(str[i]);     //lowercase added always
     }
     return result;
 }

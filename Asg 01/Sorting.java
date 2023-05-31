@@ -25,7 +25,6 @@ public class Sorting {
 		}
 	}
 	
-	
 	public static int[] getArr() {
 	
 		Scanner sc = new Scanner(System.in);

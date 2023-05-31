@@ -1,6 +1,3 @@
-/*
-  Implement the Heap/Shell sort algorithm implemented in Java demonstrating heap/shell data structure with modularity of programming language
- */
 import java.util.Scanner;
 public class Asg01 {
 
@@ -58,20 +55,17 @@ public class Asg01 {
         for (int i = n / 2; i >= 0; i--) {
             heapify(arr, i, n);
         }
-        System.out.print("Built Heap ");
+
         // step2 : push largest at end
-        printArr(arr);
-        int pass = 1;
         for (int i = n - 1; i > 0; i--) {
-            
+
             // swap
             int temp = arr[0];
             arr[0] = arr[i];
             arr[i] = temp;
-            
+
             // heapify
             heapify(arr, 0, i);
-            System.out.print("Pass "+ (pass++)+ " : ");
             printArr(arr);
         }
     }
