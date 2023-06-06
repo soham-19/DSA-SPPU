@@ -158,7 +158,7 @@ void Graph::bfsTraversal(int src, bool vis[]) {
         int curr = q.remove();
 
         if(!vis[curr]) {
-            cout << " " << curr;
+            cout << " " << char(curr+'a');
             vis[curr] = true;
 
             for (int i = 0; i < V;i++){
@@ -197,9 +197,9 @@ void Graph::dfsTraversal(int src, bool vis[]){
         if(!vis[curr]) {
 
             vis[curr] = true;
-            cout << " " << curr;
+            cout << " " << (char)(curr+'a');
 
-            for (int i = 0; i < V;i++){
+            for (int i = V-1; i >=0;i--){
                 if(mat[curr][i]==1&&!vis[i] )
                     s.push(i);
             }
@@ -209,8 +209,14 @@ void Graph::dfsTraversal(int src, bool vis[]){
 
 int main(){
 
-    Graph graph(7);
-    
-    graph.BFS(0);
-    graph.DFS(0);
+    Graph graph(6);
+
+    for (int i = 0; i < 6;i++){
+        cout << "source = " << (char)(i + 'a') << endl;
+        graph.BFS(i);
+    }
+    for (int i = 0; i < 6;i++){
+        cout << "source = " << (char)(i + 'a') << endl;
+        graph.DFS(i);
+    }
 }

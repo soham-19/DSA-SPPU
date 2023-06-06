@@ -27,8 +27,7 @@ class MinHeap{
         void add(int data){
 
             if(size==capacity){
-                cout << "MinHeap is Full. Increasing Capacity\n";
-                reHeap();
+                cout << "MinHeap is Full.\n";
             }
 
             heap[size] = data;
@@ -55,19 +54,6 @@ class MinHeap{
             return heap[0];
         }
 
-        void reHeap(){
-
-            capacity *= 2;
-            int *temp = heap;
-            heap = new int[capacity];
-
-            int oldSize = size;
-            size = 0;
-            for (int i = 0; i < oldSize;i++){
-                add(temp[i]);
-            }
-            delete temp;
-        }
 };
 
 class MaxHeap{
@@ -92,8 +78,7 @@ class MaxHeap{
         void add(int data){
 
             if(size==capacity){
-                cout << "MaxHeap is Full. Increasing Capacity\n";
-                reHeap();
+                cout << "MaxHeap is Full.";
             }
 
             heap[size] = data;
@@ -120,19 +105,6 @@ class MaxHeap{
             return heap[0];
         }
 
-        void reHeap(){
-
-            capacity *= 2;
-            int *temp = heap;
-            heap = new int[capacity];
-
-            int oldSize = size;
-            size = 0;
-            for (int i = 0; i < oldSize;i++){
-                add(temp[i]);
-            }
-            delete temp;
-        }
 };
 
 

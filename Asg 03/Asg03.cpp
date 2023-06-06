@@ -6,6 +6,7 @@ Data Set of (key, value) pairs, Keys are mapped to values, Keys must be comparab
 */
 
 /*
+approach
 class node
 class linked list
 class dict : in that array of linked list 

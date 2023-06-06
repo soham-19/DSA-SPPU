@@ -68,8 +68,7 @@ class Heap{
         cout << "Min Score = " << arr[0] << endl;
     }
     void toppers(int m) {
-        if(m>n)
-            return;
+        cout << "Toppers : \n";
         for (int i = n - 1, rank = 1; rank!=m+1;i--,rank++){
             cout << "Rank " << rank << " : " << arr[i] << endl;
         }

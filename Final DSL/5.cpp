@@ -141,10 +141,10 @@ int main()
     char expr[20];
     tree t;
 
-    cout << "Enter prefix Expression : ";
-    cin >> expr;
-    cout << expr;
-    t.expression(expr);
+    // cout << "Enter prefix Expression : ";
+    // cin >> expr;
+    // cout << expr;
+    t.expression("*+ab-cd");
 
     cout << "post : ";
     t.non_rec_postorder(t.top);
